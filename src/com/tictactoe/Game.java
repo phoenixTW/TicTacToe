@@ -16,26 +16,32 @@ public class Game {
 
     public void start() {
         int counter = 1;
+        int prev = counter;
+
         while(true) {
 
             if(counter % 2 != 0) {
-                if (game(grid, user1)){
-                    counter++;
-                    checkStrategy(user1);
-                }
+                counter += checkGameStatergy(user1);
             }
-            else if (game(grid, user2)){
-                counter++;
-                checkStrategy(user2);
-            }
+            else counter += checkGameStatergy(user2);
 
-            else System.out.println("You insert wrong position");
+            if(counter == prev) System.out.println("You insert wrong position");
 
             if(grid.isNoGridLeft()){
                 System.out.println("Game Tied");
                 System.exit(0);
             }
         }
+    }
+
+    private int checkGameStatergy(User user) {
+        int counter = 0;
+        if (game(grid, user)){
+            counter++;
+            checkStrategy(user);
+        }
+
+        return counter;
     }
 
     private void checkStrategy(User user) {
