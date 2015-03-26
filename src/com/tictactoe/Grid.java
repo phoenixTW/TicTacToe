@@ -42,6 +42,10 @@ public class Grid {
 
     public boolean input(String input, User user) {
         String[] rowAndColumn = input.split("");
+
+        if (rowAndColumn.length < 2 || rowAndColumn.length > 2 || rowAndColumn.length < 0)
+            return false;
+
         int row = Integer.parseInt(rowAndColumn[0]);
         int column = Integer.parseInt(rowAndColumn[1]);
 
