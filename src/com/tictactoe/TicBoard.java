@@ -3,12 +3,12 @@ package com.tictactoe;
 /**
  * Created by kaustavc on 3/26/2015.
  */
-public class Grid {
+public class TicBoard {
     private char[][] board;
     private int numberOfRows;
     private int numberOfColumns;
 
-    public Grid(int numberOfRows, int numberOfColumns) {
+    public TicBoard(int numberOfRows, int numberOfColumns) {
         this.numberOfRows = numberOfRows;
         this.numberOfColumns = numberOfColumns;
         board = new char[numberOfRows][numberOfColumns];
@@ -87,14 +87,31 @@ public class Grid {
         return false;
     }
 
-    public boolean isDiogonalFilled(char symbol) {
+    public boolean isDiagonalFilled(char symbol) {
+        int countForRightToLeft = rightToLeft(symbol);
+        int countForLeftToRight = leftToRight(symbol);
+        return countForLeftToRight == 3 || countForRightToLeft == 3;
+    }
+
+    private int leftToRight(char symbol) {
         int count = 0;
         for (int counter = 0; counter < numberOfColumns; counter++) {
             if(board[counter][counter] == symbol)
                 count++;
         }
+        return count;
+    }
 
-        return count == 3;
+    private int rightToLeft(char symbol) {
+        int count = 0;
+        int row = -1;
+
+        for (int counter = (numberOfColumns - 1); counter >= 0; counter--) {
+            if(board[++row][counter] == symbol) {
+                count++;
+            }
+        }
+        return count;
     }
 
     public boolean isNoGridLeft() {

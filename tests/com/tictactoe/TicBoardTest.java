@@ -9,24 +9,24 @@ import static org.junit.Assert.*;
  * Created by kaustavc on 3/26/2015.
  * Testing for the board.
  */
-public class GridTest {
-    Grid grid;
+public class TicBoardTest {
+    TicBoard ticBoard;
 
     @Before
     public void setUp() throws Exception {
 
-        grid = new Grid(3, 3);
+        ticBoard = new TicBoard(3, 3);
     }
 
     @Test
     public void testThreeByThreeGridShouldBeCreated() {
-        assertEquals(9, grid.total());
+        assertEquals(9, ticBoard.total());
     }
 
     @Test
     public void testFourByFourGridShouldBeCreated() {
-        grid = new Grid(4, 4);
-        assertNotEquals(9, grid.total());
+        ticBoard = new TicBoard(4, 4);
+        assertNotEquals(9, ticBoard.total());
     }
 
     @Test
@@ -39,12 +39,12 @@ public class GridTest {
         expected.append("---");
         expected.append(System.lineSeparator());
 
-        assertEquals(expected.toString(), grid.getBoard());
+        assertEquals(expected.toString(), ticBoard.getBoard());
     }
 
     @Test
     public void testInputShouldReplace_withXSymbol() {
-        boolean isSuccess = grid.input("11", new User('X', "User"));
+        boolean isSuccess = ticBoard.input("11", new User('X', "User"));
         assertTrue(isSuccess);
 
         StringBuilder expected = new StringBuilder();
@@ -55,13 +55,13 @@ public class GridTest {
         expected.append("---");
         expected.append(System.lineSeparator());
 
-        assertEquals(expected.toString(), grid.getBoard());
+        assertEquals(expected.toString(), ticBoard.getBoard());
     }
 
     @Test
     public void testInputShouldReplace_withXSymbolReturnsFalls() {
-        boolean isSuccess = grid.input("11", new User('X', "User"));
-        isSuccess = grid.input("11", new User('X', "User"));
+        boolean isSuccess = ticBoard.input("11", new User('X', "User"));
+        isSuccess = ticBoard.input("11", new User('X', "User"));
         assertFalse(isSuccess);
     }
 
@@ -69,8 +69,8 @@ public class GridTest {
     public void testInputShouldReplaceTheSymbolsAccordingToTheUser() {
         User u1 = new User('X', "User");
         User u2 = new User('O', "User");
-        assertTrue(grid.input("11", u1));
-        assertTrue(grid.input("12", u2));
+        assertTrue(ticBoard.input("11", u1));
+        assertTrue(ticBoard.input("12", u2));
 
         StringBuilder expected = new StringBuilder();
         expected.append("XO-");
@@ -80,17 +80,17 @@ public class GridTest {
         expected.append("---");
         expected.append(System.lineSeparator());
 
-        assertEquals(expected.toString(), grid.getBoard());
+        assertEquals(expected.toString(), ticBoard.getBoard());
     }
 
     @Test
     public void testUserShouldWinWhenRowGridContainsSameSymbol() {
         User u1 = new User('X', "User");
-        assertTrue(grid.input("11", u1));
-        assertTrue(grid.input("12", u1));
-        assertTrue(grid.input("13", u1));
+        assertTrue(ticBoard.input("11", u1));
+        assertTrue(ticBoard.input("12", u1));
+        assertTrue(ticBoard.input("13", u1));
 
-        assertTrue(grid.isRowFilled('X'));
+        assertTrue(ticBoard.isRowFilled('X'));
 
     }
 
@@ -98,44 +98,44 @@ public class GridTest {
     public void testUserShouldNotWinWhenRowGridContainsDifferentSymbol() {
         User u1 = new User('X', "User");
         User u2 = new User('O', "User");
-        assertTrue(grid.input("11", u1));
-        assertTrue(grid.input("12", u2));
-        assertTrue(grid.input("13", u1));
+        assertTrue(ticBoard.input("11", u1));
+        assertTrue(ticBoard.input("12", u2));
+        assertTrue(ticBoard.input("13", u1));
 
-        assertFalse(grid.isRowFilled('X'));
+        assertFalse(ticBoard.isRowFilled('X'));
 
     }
 
     @Test
     public void testUserShouldWinWhenColumnsGridContainsSameSymbol() {
         User u1 = new User('X', "User");
-        assertTrue(grid.input("11", u1));
-        assertTrue(grid.input("21", u1));
-        assertTrue(grid.input("31", u1));
+        assertTrue(ticBoard.input("11", u1));
+        assertTrue(ticBoard.input("21", u1));
+        assertTrue(ticBoard.input("31", u1));
 
-        assertTrue(grid.isColumnsFilled('X'));
+        assertTrue(ticBoard.isColumnsFilled('X'));
 
     }
     @Test
     public void testUserShouldNotWinWhenColumnsGridContainsDifferentSymbol() {
         User u1 = new User('X', "User");
         User u2 = new User('O', "User");
-        assertTrue(grid.input("11", u1));
-        assertTrue(grid.input("21", u2));
-        assertTrue(grid.input("31", u1));
+        assertTrue(ticBoard.input("11", u1));
+        assertTrue(ticBoard.input("21", u2));
+        assertTrue(ticBoard.input("31", u1));
 
-        assertFalse(grid.isColumnsFilled('X'));
+        assertFalse(ticBoard.isColumnsFilled('X'));
 
     }
 
     @Test
     public void testCrossStratergyShouldGiveTrueWhenTheGridAreFilledInCross() {
         User u1 = new User('X', "User");
-        assertTrue(grid.input("11", u1));
-        assertTrue(grid.input("22", u1));
-        assertTrue(grid.input("33", u1));
+        assertTrue(ticBoard.input("11", u1));
+        assertTrue(ticBoard.input("22", u1));
+        assertTrue(ticBoard.input("33", u1));
 
-        assertTrue(grid.isDiogonalFilled('X'));
+        assertTrue(ticBoard.isDiagonalFilled('X'));
 
     }
 
@@ -143,11 +143,22 @@ public class GridTest {
     public void testCrossStratergyShouldGiveFalseWhenTheGridAreFilledInCross() {
         User u1 = new User('X', "User");
         User u2 = new User('O', "User");
-        assertTrue(grid.input("11", u1));
-        assertTrue(grid.input("22", u2));
-        assertTrue(grid.input("33", u1));
+        assertTrue(ticBoard.input("11", u1));
+        assertTrue(ticBoard.input("22", u2));
+        assertTrue(ticBoard.input("33", u1));
 
-        assertFalse(grid.isDiogonalFilled('X'));
+        assertFalse(ticBoard.isDiagonalFilled('X'));
+
+    }
+
+    @Test
+    public void testCrossStratergyShouldGiveTrueWhenTheGridAreFilledFromRigntToLeft() {
+        User u1 = new User('X', "User");
+        assertTrue(ticBoard.input("13", u1));
+        assertTrue(ticBoard.input("22", u1));
+        assertTrue(ticBoard.input("31", u1));
+
+        assertTrue(ticBoard.isDiagonalFilled('X'));
 
     }
 }
