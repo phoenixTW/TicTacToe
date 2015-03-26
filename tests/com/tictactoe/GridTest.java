@@ -43,7 +43,7 @@ public class GridTest {
 
     @Test
     public void testInputShouldReplace_withXSymbol() {
-        boolean isSuccess = grid.input("11");
+        boolean isSuccess = grid.input("11", new User('X'));
         assertTrue(isSuccess);
 
         StringBuilder expected = new StringBuilder();
@@ -59,8 +59,26 @@ public class GridTest {
 
     @Test
     public void testInputShouldReplace_withXSymbolReturnsFalls() {
-        boolean isSuccess = grid.input("11");
-        isSuccess = grid.input("11");
+        boolean isSuccess = grid.input("11", new User('X'));
+        isSuccess = grid.input("11", new User('X'));
         assertFalse(isSuccess);
+    }
+
+    @Test
+    public void testInputShouldReplaceTheSymbolsAccordingToTheUser() {
+        User u1 = new User('X');
+        User u2 = new User('O');
+        assertTrue(grid.input("11", u1));
+        assertTrue(grid.input("12", u2));
+
+        StringBuilder expected = new StringBuilder();
+        expected.append("XO-");
+        expected.append(System.lineSeparator());
+        expected.append("---");
+        expected.append(System.lineSeparator());
+        expected.append("---");
+        expected.append(System.lineSeparator());
+
+        assertEquals(expected.toString(), grid.getBoard());
     }
 }

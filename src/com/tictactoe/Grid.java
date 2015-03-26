@@ -40,13 +40,13 @@ public class Grid {
         return showBoard.toString();
     }
 
-    public boolean input(String input) {
+    public boolean input(String input, User user) {
         String[] rowAndColumn = input.split("");
         int row = Integer.parseInt(rowAndColumn[0]);
         int column = Integer.parseInt(rowAndColumn[1]);
 
         if (board[row - 1][column - 1] == '-'){
-            board[row - 1][column - 1] = 'X';
+            board[row - 1][column - 1] = user.getSymbol();
             return true;
         }
 
