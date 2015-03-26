@@ -7,6 +7,7 @@ import static org.junit.Assert.*;
 
 /**
  * Created by kaustavc on 3/26/2015.
+ * Testing for the board.
  */
 public class GridTest {
     Grid grid;
@@ -124,6 +125,29 @@ public class GridTest {
         assertTrue(grid.input("31", u1));
 
         assertFalse(grid.isColumnsFilled('X'));
+
+    }
+
+    @Test
+    public void testCrossStratergyShouldGiveTrueWhenTheGridAreFilledInCross() {
+        User u1 = new User('X');
+        assertTrue(grid.input("11", u1));
+        assertTrue(grid.input("22", u1));
+        assertTrue(grid.input("33", u1));
+
+        assertTrue(grid.isDiogonalFilled('X'));
+
+    }
+
+    @Test
+    public void testCrossStratergyShouldGiveFalseWhenTheGridAreFilledInCross() {
+        User u1 = new User('X');
+        User u2 = new User('O');
+        assertTrue(grid.input("11", u1));
+        assertTrue(grid.input("22", u2));
+        assertTrue(grid.input("33", u1));
+
+        assertFalse(grid.isDiogonalFilled('X'));
 
     }
 }

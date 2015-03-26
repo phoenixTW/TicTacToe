@@ -18,11 +18,29 @@ public class Game {
         int counter = 1;
         while(true) {
             if(counter % 2 != 0) {
-                if (game(grid, user1)) counter++;
+                if (game(grid, user1)){
+                    counter++;
+                    checkStrategy(user1);
+                }
             }
-            else if (game(grid, user2)) counter++;
+            else if (game(grid, user2)){
+                counter++;
+                checkStrategy(user2);
+            }
+
             else System.out.println("You insert wrong position");
         }
+    }
+
+    private void checkStrategy(User user) {
+        if(grid.isRowFilled(user.getSymbol())
+                || grid.isColumnsFilled(user.getSymbol())
+                || grid.isDiogonalFilled(user.getSymbol())){
+
+            System.out.println(grid.getBoard());
+            System.exit(0);
+        }
+
     }
 
     private boolean game(Grid grid, User user) {
@@ -32,5 +50,4 @@ public class Game {
         String input = scan.next();
         return grid.input(input, user);
     }
-
 }

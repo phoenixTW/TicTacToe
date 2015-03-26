@@ -82,4 +82,14 @@ public class Grid {
 
         return false;
     }
+
+    public boolean isDiogonalFilled(char symbol) {
+        int count = 0;
+        for (int counter = 0; counter < numberOfColumns; counter++) {
+            if(board[counter][counter] == symbol)
+                count++;
+        }
+
+        return count == 3;
+    }
 }
