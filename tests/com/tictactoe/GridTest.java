@@ -81,4 +81,49 @@ public class GridTest {
 
         assertEquals(expected.toString(), grid.getBoard());
     }
+
+    @Test
+    public void testUserShouldWinWhenRowGridContainsSameSymbol() {
+        User u1 = new User('X');
+        assertTrue(grid.input("11", u1));
+        assertTrue(grid.input("12", u1));
+        assertTrue(grid.input("13", u1));
+
+        assertTrue(grid.isRowFilled('X'));
+
+    }
+
+    @Test
+    public void testUserShouldNotWinWhenRowGridContainsDifferentSymbol() {
+        User u1 = new User('X');
+        User u2 = new User('O');
+        assertTrue(grid.input("11", u1));
+        assertTrue(grid.input("12", u2));
+        assertTrue(grid.input("13", u1));
+
+        assertFalse(grid.isRowFilled('X'));
+
+    }
+
+    @Test
+    public void testUserShouldWinWhenColumnsGridContainsSameSymbol() {
+        User u1 = new User('X');
+        assertTrue(grid.input("11", u1));
+        assertTrue(grid.input("21", u1));
+        assertTrue(grid.input("31", u1));
+
+        assertTrue(grid.isColumnsFilled('X'));
+
+    }
+    @Test
+    public void testUserShouldNotWinWhenColumnsGridContainsDifferentSymbol() {
+        User u1 = new User('X');
+        User u2 = new User('O');
+        assertTrue(grid.input("11", u1));
+        assertTrue(grid.input("21", u2));
+        assertTrue(grid.input("31", u1));
+
+        assertFalse(grid.isColumnsFilled('X'));
+
+    }
 }

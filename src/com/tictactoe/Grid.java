@@ -52,4 +52,34 @@ public class Grid {
 
         return false;
     }
+
+    public boolean isRowFilled(char symbol) {
+        int count = 0;
+        for (int outerCounter = 0; outerCounter < numberOfRows; outerCounter++) {
+            for (int innerCounter = 0; innerCounter < numberOfColumns; innerCounter++) {
+                if (board[outerCounter][innerCounter] == symbol) count++;
+            }
+
+            if (count == numberOfColumns) return true;
+
+            count = 0;
+        }
+
+        return false;
+    }
+
+    public boolean isColumnsFilled(char symbol) {
+        int count = 0;
+        for (int outerCounter = 0; outerCounter < numberOfColumns; outerCounter++) {
+            for (int innerCounter = 0; innerCounter < numberOfRows; innerCounter++) {
+                if (board[innerCounter][outerCounter] == symbol) count++;
+            }
+
+            if (count == numberOfRows) return true;
+
+            count = 0;
+        }
+
+        return false;
+    }
 }
