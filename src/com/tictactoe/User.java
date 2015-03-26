@@ -5,12 +5,18 @@ package com.tictactoe;
  */
 public class User {
     private final char symbol;
+    private final String name;
 
-    public User(char symbol) {
+    public User(char symbol, String name) {
         this.symbol = symbol;
+        this.name = name;
     }
 
     public char getSymbol() {
         return symbol;
+    }
+
+    public String getName() {
+        return name;
     }
 }

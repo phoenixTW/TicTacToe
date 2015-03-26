@@ -44,7 +44,7 @@ public class GridTest {
 
     @Test
     public void testInputShouldReplace_withXSymbol() {
-        boolean isSuccess = grid.input("11", new User('X'));
+        boolean isSuccess = grid.input("11", new User('X', "User"));
         assertTrue(isSuccess);
 
         StringBuilder expected = new StringBuilder();
@@ -60,15 +60,15 @@ public class GridTest {
 
     @Test
     public void testInputShouldReplace_withXSymbolReturnsFalls() {
-        boolean isSuccess = grid.input("11", new User('X'));
-        isSuccess = grid.input("11", new User('X'));
+        boolean isSuccess = grid.input("11", new User('X', "User"));
+        isSuccess = grid.input("11", new User('X', "User"));
         assertFalse(isSuccess);
     }
 
     @Test
     public void testInputShouldReplaceTheSymbolsAccordingToTheUser() {
-        User u1 = new User('X');
-        User u2 = new User('O');
+        User u1 = new User('X', "User");
+        User u2 = new User('O', "User");
         assertTrue(grid.input("11", u1));
         assertTrue(grid.input("12", u2));
 
@@ -85,7 +85,7 @@ public class GridTest {
 
     @Test
     public void testUserShouldWinWhenRowGridContainsSameSymbol() {
-        User u1 = new User('X');
+        User u1 = new User('X', "User");
         assertTrue(grid.input("11", u1));
         assertTrue(grid.input("12", u1));
         assertTrue(grid.input("13", u1));
@@ -96,8 +96,8 @@ public class GridTest {
 
     @Test
     public void testUserShouldNotWinWhenRowGridContainsDifferentSymbol() {
-        User u1 = new User('X');
-        User u2 = new User('O');
+        User u1 = new User('X', "User");
+        User u2 = new User('O', "User");
         assertTrue(grid.input("11", u1));
         assertTrue(grid.input("12", u2));
         assertTrue(grid.input("13", u1));
@@ -108,7 +108,7 @@ public class GridTest {
 
     @Test
     public void testUserShouldWinWhenColumnsGridContainsSameSymbol() {
-        User u1 = new User('X');
+        User u1 = new User('X', "User");
         assertTrue(grid.input("11", u1));
         assertTrue(grid.input("21", u1));
         assertTrue(grid.input("31", u1));
@@ -118,8 +118,8 @@ public class GridTest {
     }
     @Test
     public void testUserShouldNotWinWhenColumnsGridContainsDifferentSymbol() {
-        User u1 = new User('X');
-        User u2 = new User('O');
+        User u1 = new User('X', "User");
+        User u2 = new User('O', "User");
         assertTrue(grid.input("11", u1));
         assertTrue(grid.input("21", u2));
         assertTrue(grid.input("31", u1));
@@ -130,7 +130,7 @@ public class GridTest {
 
     @Test
     public void testCrossStratergyShouldGiveTrueWhenTheGridAreFilledInCross() {
-        User u1 = new User('X');
+        User u1 = new User('X', "User");
         assertTrue(grid.input("11", u1));
         assertTrue(grid.input("22", u1));
         assertTrue(grid.input("33", u1));
@@ -141,8 +141,8 @@ public class GridTest {
 
     @Test
     public void testCrossStratergyShouldGiveFalseWhenTheGridAreFilledInCross() {
-        User u1 = new User('X');
-        User u2 = new User('O');
+        User u1 = new User('X', "User");
+        User u2 = new User('O', "User");
         assertTrue(grid.input("11", u1));
         assertTrue(grid.input("22", u2));
         assertTrue(grid.input("33", u1));

@@ -8,7 +8,7 @@ public class UserTest {
 
     @Test
     public void testGetSymbolShouldReturnTheSymbolOfTheUser() {
-        User u1 = new User('X');
+        User u1 = new User('X', "User");
         char u1Expected = 'X';
         assertEquals(u1Expected, u1.getSymbol());
     }

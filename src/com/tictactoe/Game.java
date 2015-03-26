@@ -10,8 +10,8 @@ public class Game {
     public Game(Grid grid) {
 
         this.grid = grid;
-        user1 = new User('X');
-        user2 = new User('O');
+        user1 = new User('X', "User 1");
+        user2 = new User('O', "User 2");
     }
 
     public void start() {
@@ -38,6 +38,7 @@ public class Game {
                 || grid.isDiogonalFilled(user.getSymbol())){
 
             System.out.println(grid.getBoard());
+            System.out.println(user.getName() + " won the game");
             System.exit(0);
         }
 
