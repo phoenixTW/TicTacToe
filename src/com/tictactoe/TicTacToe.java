@@ -1,8 +1,14 @@
 package com.tictactoe;
 
+import java.util.NoSuchElementException;
+
 public class TicTacToe {
 
     public static void main(String[] args) {
-        new Game(new Grid(3, 3)).start();
+        try{
+            new Game(new Grid(3, 3)).start();
+        }catch (NoSuchElementException e) {
+            System.out.println("Game stopped");
+        }
     }
 }
