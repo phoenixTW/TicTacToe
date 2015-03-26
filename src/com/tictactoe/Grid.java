@@ -96,4 +96,15 @@ public class Grid {
 
         return count == 3;
     }
+
+    public boolean isNoGridLeft() {
+        int count = 0;
+        for (int outerCounter = 0; outerCounter < numberOfRows; outerCounter++) {
+            for (int innerCounter = 0; innerCounter < numberOfColumns; innerCounter++) {
+                if(board[outerCounter][innerCounter] != '-') count++;
+            }
+        }
+
+        return count == total();
+    }
 }

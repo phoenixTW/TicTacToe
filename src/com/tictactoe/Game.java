@@ -17,6 +17,7 @@ public class Game {
     public void start() {
         int counter = 1;
         while(true) {
+
             if(counter % 2 != 0) {
                 if (game(grid, user1)){
                     counter++;
@@ -29,6 +30,11 @@ public class Game {
             }
 
             else System.out.println("You insert wrong position");
+
+            if(grid.isNoGridLeft()){
+                System.out.println("Game Tied");
+                System.exit(0);
+            }
         }
     }
 
