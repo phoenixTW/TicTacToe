@@ -21,9 +21,14 @@ public class Game {
             if(counter % 2 != 0) {
                 counter += checkGameStrategy(user1);
             }
-            else counter += checkGameStrategy(user2);
+            else {
+                counter += checkGameStrategy(user2);
+            }
+
             if(counter == prev) System.out.println("You insert wrong position");
-            if(ticBoard.isNoGridLeft()){
+            else prev = counter;
+
+            if(ticBoard.isNoGridLeft()){//naming
                 System.out.println("Game Tied");
                 System.exit(0);
             }
@@ -40,9 +45,10 @@ public class Game {
     }
 
     private void checkStrategy(User user) {
-        if(ticBoard.isRowFilled(user.getSymbol())
-                || ticBoard.isColumnsFilled(user.getSymbol())
-                || ticBoard.isDiagonalFilled(user.getSymbol())){
+        Strategies strategies = new Strategies();
+        if(strategies.isRowFilled(user.getSymbol(), ticBoard)
+                || strategies.isColumnsFilled(user.getSymbol(), ticBoard)
+                || strategies.isDiagonalFilled(user.getSymbol(), ticBoard)){
 
             System.out.println(ticBoard.getBoard());
             System.out.println(user.getName() + " won the game");

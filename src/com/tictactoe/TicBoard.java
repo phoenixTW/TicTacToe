@@ -23,10 +23,6 @@ public class TicBoard {
         }
     }
 
-    public int total() {
-        return numberOfRows * numberOfColumns;
-    }
-
     public String getBoard() {
         StringBuilder showBoard = new StringBuilder();
         for (int outerCounter = 0; outerCounter < numberOfRows; outerCounter++) {
@@ -56,62 +52,8 @@ public class TicBoard {
 
         return false;
     }
-
-    public boolean isRowFilled(char symbol) {
-        int count = 0;
-        for (int outerCounter = 0; outerCounter < numberOfRows; outerCounter++) {
-            for (int innerCounter = 0; innerCounter < numberOfColumns; innerCounter++) {
-                if (board[outerCounter][innerCounter] == symbol) count++;
-            }
-
-            if (count == numberOfColumns) return true;
-
-            count = 0;
-        }
-
-        return false;
-    }
-
-    public boolean isColumnsFilled(char symbol) {
-        int count = 0;
-        for (int outerCounter = 0; outerCounter < numberOfColumns; outerCounter++) {
-            for (int innerCounter = 0; innerCounter < numberOfRows; innerCounter++) {
-                if (board[innerCounter][outerCounter] == symbol) count++;
-            }
-
-            if (count == numberOfRows) return true;
-
-            count = 0;
-        }
-
-        return false;
-    }
-
-    public boolean isDiagonalFilled(char symbol) {
-        int countForRightToLeft = rightToLeft(symbol);
-        int countForLeftToRight = leftToRight(symbol);
-        return countForLeftToRight == 3 || countForRightToLeft == 3;
-    }
-
-    private int leftToRight(char symbol) {
-        int count = 0;
-        for (int counter = 0; counter < numberOfColumns; counter++) {
-            if(board[counter][counter] == symbol)
-                count++;
-        }
-        return count;
-    }
-
-    private int rightToLeft(char symbol) {
-        int count = 0;
-        int row = -1;
-
-        for (int counter = (numberOfColumns - 1); counter >= 0; counter--) {
-            if(board[++row][counter] == symbol) {
-                count++;
-            }
-        }
-        return count;
+    public boolean isSymbol(char symbol, int outerCounter, int innerCounter) {
+        return board[outerCounter][innerCounter] == symbol;
     }
 
     public boolean isNoGridLeft() {
@@ -122,6 +64,6 @@ public class TicBoard {
             }
         }
 
-        return count == total();
+        return count == numberOfRows * numberOfColumns;
     }
 }

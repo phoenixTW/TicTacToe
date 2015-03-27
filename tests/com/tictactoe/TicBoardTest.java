@@ -9,24 +9,15 @@ import static org.junit.Assert.*;
  * Created by kaustavc on 3/26/2015.
  * Testing for the board.
  */
+
 public class TicBoardTest {
     TicBoard ticBoard;
+    Strategies strategies;
 
     @Before
     public void setUp() throws Exception {
-
         ticBoard = new TicBoard(3, 3);
-    }
-
-    @Test
-    public void testThreeByThreeGridShouldBeCreated() {
-        assertEquals(9, ticBoard.total());
-    }
-
-    @Test
-    public void testFourByFourGridShouldBeCreated() {
-        ticBoard = new TicBoard(4, 4);
-        assertNotEquals(9, ticBoard.total());
+        strategies = new Strategies();
     }
 
     @Test
@@ -79,7 +70,6 @@ public class TicBoardTest {
         expected.append(System.lineSeparator());
         expected.append("---");
         expected.append(System.lineSeparator());
-
         assertEquals(expected.toString(), ticBoard.getBoard());
     }
 
@@ -89,9 +79,7 @@ public class TicBoardTest {
         assertTrue(ticBoard.input("11", u1));
         assertTrue(ticBoard.input("12", u1));
         assertTrue(ticBoard.input("13", u1));
-
-        assertTrue(ticBoard.isRowFilled('X'));
-
+        assertTrue(strategies.isRowFilled('X', ticBoard));
     }
 
     @Test
@@ -101,9 +89,7 @@ public class TicBoardTest {
         assertTrue(ticBoard.input("11", u1));
         assertTrue(ticBoard.input("12", u2));
         assertTrue(ticBoard.input("13", u1));
-
-        assertFalse(ticBoard.isRowFilled('X'));
-
+        assertFalse(strategies.isRowFilled('X', ticBoard));
     }
 
     @Test
@@ -112,9 +98,7 @@ public class TicBoardTest {
         assertTrue(ticBoard.input("11", u1));
         assertTrue(ticBoard.input("21", u1));
         assertTrue(ticBoard.input("31", u1));
-
-        assertTrue(ticBoard.isColumnsFilled('X'));
-
+        assertTrue(strategies.isColumnsFilled('X', ticBoard));
     }
     @Test
     public void testUserShouldNotWinWhenColumnsGridContainsDifferentSymbol() {
@@ -123,9 +107,7 @@ public class TicBoardTest {
         assertTrue(ticBoard.input("11", u1));
         assertTrue(ticBoard.input("21", u2));
         assertTrue(ticBoard.input("31", u1));
-
-        assertFalse(ticBoard.isColumnsFilled('X'));
-
+        assertFalse(strategies.isColumnsFilled('X', ticBoard));
     }
 
     @Test
@@ -134,9 +116,7 @@ public class TicBoardTest {
         assertTrue(ticBoard.input("11", u1));
         assertTrue(ticBoard.input("22", u1));
         assertTrue(ticBoard.input("33", u1));
-
-        assertTrue(ticBoard.isDiagonalFilled('X'));
-
+        assertTrue(strategies.isDiagonalFilled('X', ticBoard));
     }
 
     @Test
@@ -146,9 +126,7 @@ public class TicBoardTest {
         assertTrue(ticBoard.input("11", u1));
         assertTrue(ticBoard.input("22", u2));
         assertTrue(ticBoard.input("33", u1));
-
-        assertFalse(ticBoard.isDiagonalFilled('X'));
-
+        assertFalse(strategies.isDiagonalFilled('X', ticBoard));
     }
 
     @Test
@@ -157,8 +135,6 @@ public class TicBoardTest {
         assertTrue(ticBoard.input("13", u1));
         assertTrue(ticBoard.input("22", u1));
         assertTrue(ticBoard.input("31", u1));
-
-        assertTrue(ticBoard.isDiagonalFilled('X'));
-
+        assertTrue(strategies.isDiagonalFilled('X', ticBoard));
     }
 }
